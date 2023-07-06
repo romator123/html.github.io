@@ -19,8 +19,8 @@
       </div>
       <div class="button">
           <legend>Ваша оценка</legend>
-          <input type="radio" required  id="r1" value="+"><label for="r1">+</label>
-          <input type="radio" required  id="r2" value="-"><label for="r2">-</label>
+          <input type="radio" required name="marks" id="r1" value="+"><label for="r1">+</label>
+          <input type="radio" required name="marks" id="r2" value="-"><label for="r2">-</label>
       </div>
       <div class="container">
           <textarea placeholder="Введите пояснение мин. 50 символов" name="" id="text" cols="55" rows="5" required></textarea>
@@ -37,17 +37,16 @@
   </div>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
+      let tg = window.Telegram.WebApp;
+      tg.expand();
+      let send = document.getElementById("send");
       const textarea = document.querySelector('textarea');
       const counter = document.querySelector('.current');
       const maxlength = 10;
-
       textarea.addEventListener('input', onInput)
       function onInput(event) {// обрезаем текст до 360 символов
           const length = event.target.value.length;
           counter.textContent = length;}
-      let tg = window.Telegram.WebApp;
-      tg.expand();
-      let send = document.getElementById("send");
       document.getElementById("error").innerText='';
       send.addEventListener("click", () =>{
           let user = document.getElementById("user").value;
@@ -60,6 +59,7 @@
           if (document.getElementById('r2').checked) {
                  mark = document.getElementById('r2').value;
           }
+          console.log(mark)
           if (user.length < 1){
               document.getElementById("error").innerText = "Вы не ввели ФИО"
               return;
@@ -79,6 +79,7 @@
               mark : mark,
               text : text
           }
+          console.log(data)
           tg.sendData(JSON.stringify(data));
           tg.close()
       });
