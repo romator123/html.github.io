@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Светофор "Абак-2000"</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
    </head>
 <body>
   <div class="wrapper">
@@ -18,12 +18,16 @@
         <input type="text" placeholder="Введите ФИО адресата" id="adressat" required>
       </div>
       <div class="button">
-          <legend>Ваша оценка<abbr title="This field is mandatory" aria-label="required"></abbr></legend>
-          <input type="radio" required name="driver" id="r1" value="+"><label for="r1">+</label>
-          <input type="radio" required name="driver" id="r2" value="-"><label for="r1">-</label>
+          <legend>Ваша оценка</legend>
+          <input type="radio" required  id="r1" value="+"><label for="r1">+</label>
+          <input type="radio" required  id="r2" value="-"><label for="r2">-</label>
       </div>
-      <legend>Пояснение</legend>
-      <div class="textareaElement" id="text" contenteditable>
+      <div class="container">
+          <textarea placeholder="Введите пояснение мин. 50 символов" name="" id="text" cols="55" rows="5" required></textarea>
+          <div class="counter">
+           <span class="current">0</span>&nbsp;/
+           <span class="total">10</span>
+          </div>
       </div>
       <div id="error"></div>
       <div class="input-box button">
@@ -33,38 +37,41 @@
   </div>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
+      const textarea = document.querySelector('textarea');
+      const counter = document.querySelector('.current');
+      const maxlength = 10;
+
+      textarea.addEventListener('input', onInput)
+      function onInput(event) {// обрезаем текст до 360 символов
+          const length = event.target.value.length;
+          counter.textContent = length;}
       let tg = window.Telegram.WebApp;
       tg.expand();
       let send = document.getElementById("send");
-      const form = document.querySelector("form");
+      document.getElementById("error").innerText='';
       send.addEventListener("click", () =>{
-          document.getElementById("error").innerText='';
           let user = document.getElementById("user").value;
           let adressat = document.getElementById("adressat").value;
-          let text = document.getElementById("text").textContent;
-          const data2 = new FormData(form);
-          let mark = "";
-          for (const entry of data2) {
-              mark=entry[1];
+          let text = document.getElementById("text").value;
+          let mark ='';
+          if (document.getElementById('r1').checked) {
+                 mark = document.getElementById('r1').value;
           }
-          if (user.length < 5){
-              document.getElementById("error").innerText = "Вы не ввели ФИО";
+          if (document.getElementById('r2').checked) {
+                 mark = document.getElementById('r2').value;
+          }
+          if (user.length < 1){
+              document.getElementById("error").innerText = "Вы не ввели ФИО"
               return;
           }
-          if (adressat.length < 5){
-              document.getElementById("error").innerText = "Вы не ввели ФИО адресата";
+          if (adressat.length < 1){
+              document.getElementById("error").innerText = "Вы не ввели ФИО адресата"
               return;
           }
-          if (mark.length < 1){
-            document.getElementById("error").innerText = "Не проставили оценку";
-            return;
-          }
-          if (text.length < 50){
-              document.getElementById("error").innerText = "Вы не ввели пояснение";
+          if (text.length < 10){
+              document.getElementById("error").innerText = "Вы не ввели пояснение"
               return;
           }
-          
-        
 
           let data = {
               user : user,
@@ -73,7 +80,7 @@
               text : text
           }
           tg.sendData(JSON.stringify(data));
-          tg.close();
+          tg.close()
       });
   </script>
 </body>
