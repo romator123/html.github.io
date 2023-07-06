@@ -42,19 +42,19 @@
           let adressat = document.getElementById("adressat").value;
           let mark = document.getElementById("mark").value;
           let text = document.getElementById("text").value;
-          if (user.length < 1){
+          if (user.length < 5){
               document.getElementById("error").innerText = "Вы не ввели ФИО";
               return;
           }
-          if (adressat.length < 1){
+          if (adressat.length < 5){
               document.getElementById("error").innerText = "Вы не ввели ФИО адресата";
               return;
           }
-          // if(mark !==  "+" || mark !== "-"){
-          //     document.getElementById("error").innerText = "Ошибка в оценке";
-          //     return;
-          // }
-          if (text.length < 1){
+          if(mark !=  "+" || mark != "-"){
+              document.getElementById("error").innerText = "Ошибка в оценке";
+              return;
+          }
+          if (text.length < 50){
               document.getElementById("error").innerText = "Вы не ввели пояснение";
               return;
           }
