@@ -42,7 +42,7 @@
           document.getElementById("error").innerText='';
           let user = document.getElementById("user").value;
           let adressat = document.getElementById("adressat").value;
-          let text = document.getElementById("text").value;
+          let text = document.getElementById("text").textContent;
           const data2 = new FormData(form);
           let mark = "";
           for (const entry of data2) {
