@@ -58,7 +58,7 @@
               document.getElementById("error").innerText = "Вы не ввели пояснение"
               return;
           }
-          tg.close();
+        
 
           let data = {
               user : user,
@@ -67,6 +67,7 @@
               text : text
           }
           tg.sendData(JSON.stringify(data));
+          tg.close();
       });
   </script>
 </body>
