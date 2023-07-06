@@ -34,9 +34,8 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <script>
       let tg = window.Telegram.WebApp;
-
-      let send = document.getElementById("send");
       tg.expand();
+      let send = document.getElementById("send");
       const form = document.querySelector("form");
       send.addEventListener("click", () =>{
           document.getElementById("error").innerText='';
