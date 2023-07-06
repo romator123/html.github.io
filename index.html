@@ -50,11 +50,11 @@
               document.getElementById("error").innerText = "Вы не ввели ФИО адресата";
               return;
           }
-          if(mark !=  "+" || mark != "-"){
-              document.getElementById("error").innerText = "Ошибка в оценке";
-              return;
-          }
-          if (text.length < 50){
+          // if(mark !=  "+" || mark != "-"){
+          //     document.getElementById("error").innerText = "Ошибка в оценке";
+          //     return;
+          // }
+          if (text.length < 10){
               document.getElementById("error").innerText = "Вы не ввели пояснение";
               return;
           }
