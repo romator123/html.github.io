@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - codingnepalweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Светофор "Абак-2000"</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+   </head>
+<body>
+  <div class="wrapper">
+    <h2>Обращение "Светофор"</h2>
+    <form action="#">
+      <div class="input-box">
+        <input type="text" placeholder="Введите ваше ФИО" id="user" required>
+      </div>
+      <div class="input-box">
+        <input type="text" placeholder="Введите ФИО адресата" id="adressat" required>
+      </div>
+      <div class="input-box">
+          <input type="text" placeholder="Поставьте +/-" id="mark" required>
+      </div>
+      <div class="input-box">
+          <input type="text" placeholder="Введите пояснение" id="text" required>
+      </div>
+      <div id="error"></div>
+      <div class="input-box button">
+        <input type="Submit" value="Отправить" id="send">
+      </div>
+    </form>
+  </div>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script>
+      let tg = window.Telegram.WebApp;
+
+      let send = document.getElementById("send");
+      tg.expand();
+
+      send.addEventListener("click", () =>{
+          document.getElementById("error").innerText='';
+          let user = document.getElementById("user").value;
+          let adressat = document.getElementById("adressat").value;
+          let mark = document.getElementById("mark").value;
+          let text = document.getElementById("text").value;
+          if(mark === "+" || mark ==="-"){
+              document.getElementById("error").innerText = "Ошибка в оценке"
+              return;
+          }
+          tg.close();
+
+          let data = {
+              user : user,
+              adressat : adressat,
+              mark : mark,
+              text : text
+          }
+          tg.sendData(JSON.stringify(data));
+      });
+  </script>
+</body>
+</html>
