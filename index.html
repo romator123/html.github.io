@@ -17,8 +17,10 @@
       <div class="input-box">
         <input type="text" placeholder="Введите ФИО адресата" id="adressat" required>
       </div>
-      <div class="input-box">
-          <input type="text" placeholder="Поставьте +/-" id="mark" required>
+      <div class="button">
+          <legend>Ваша оценка<abbr title="This field is mandatory" aria-label="required"></abbr></legend>
+          <input type="radio" required name="driver" id="r1" value="+"><label for="r1">+</label>
+          <input type="radio" required name="driver" id="r1" value="-"><label for="r1">-</label>
       </div>
       <div class="input-box">
           <input type="text" placeholder="Введите пояснение" id="text" required>
@@ -40,7 +42,7 @@
           document.getElementById("error").innerText='';
           let user = document.getElementById("user").value;
           let adressat = document.getElementById("adressat").value;
-          let mark = document.getElementById("mark").value;
+          let mark = document.getElementById("r1").value;
           let text = document.getElementById("text").value;
           if (user.length < 5){
               document.getElementById("error").innerText = "Вы не ввели ФИО";
@@ -50,14 +52,15 @@
               document.getElementById("error").innerText = "Вы не ввели ФИО адресата";
               return;
           }
-          if(mark !=  "+"){
-              document.getElementById("error").innerText = "Ошибка в оценке";
-              return;
+          if (mark.length < 1){
+            document.getElementById("error").innerText = "Не проставили оценку";
+            return;
           }
           if (text.length < 10){
               document.getElementById("error").innerText = "Вы не ввели пояснение";
               return;
           }
+          
         
 
           let data = {
