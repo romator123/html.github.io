@@ -42,16 +42,16 @@
           let adressat = document.getElementById("adressat").value;
           let mark = document.getElementById("mark").value;
           let text = document.getElementById("text").value;
-          if(mark !==  "+" || mark !== "-"){
-              document.getElementById("error").innerText = "Ошибка в оценке"
-              return;
-          }
           if (user.length < 1){
               document.getElementById("error").innerText = "Вы не ввели ФИО"
               return;
           }
           if (adressat.length < 1){
               document.getElementById("error").innerText = "Вы не ввели ФИО адресата"
+              return;
+          }
+          if(mark !==  "+" || mark !== "-"){
+              document.getElementById("error").innerText = "Ошибка в оценке"
               return;
           }
           if (text.length < 1){
