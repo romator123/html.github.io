@@ -10,7 +10,7 @@
 <body>
   <div class="wrapper">
     <h2>Обращение "Светофор"</h2>
-    <form action="#">
+    <form id="myForm">
       <div class="input-box">
         <input type="text" placeholder="Введите ваше ФИО" id="user" required>
       </div>
@@ -43,6 +43,9 @@
       const textarea = document.querySelector('textarea');
       const counter = document.querySelector('.current');
       const maxlength = 50;
+      var form = document.getElementById("myForm");
+      function handleForm(event) { event.preventDefault(); }
+      form.addEventListener('submit', handleForm);
       textarea.addEventListener('input', onInput)
       function onInput(event) {// обрезаем текст до 360 символов
           const length = event.target.value.length;
