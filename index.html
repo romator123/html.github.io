@@ -26,7 +26,7 @@
           <textarea placeholder="Введите пояснение мин. 50 символов" name="" id="text" cols="55" rows="5" required></textarea>
           <div class="counter">
            <span class="current">0</span>&nbsp;/
-           <span class="total">10</span>
+           <span class="total">50</span>
           </div>
       </div>
       <div id="error"></div>
@@ -42,7 +42,7 @@
       let send = document.getElementById("send");
       const textarea = document.querySelector('textarea');
       const counter = document.querySelector('.current');
-      const maxlength = 10;
+      const maxlength = 50;
       textarea.addEventListener('input', onInput)
       function onInput(event) {// обрезаем текст до 360 символов
           const length = event.target.value.length;
@@ -59,16 +59,19 @@
           if (document.getElementById('r2').checked) {
                  mark = document.getElementById('r2').value;
           }
-          console.log(mark)
-          if (user.length < 1){
+          if (user.length < 5){
               document.getElementById("error").innerText = "Вы не ввели ФИО"
               return;
           }
-          if (adressat.length < 1){
+          if (adressat.length < 5){
               document.getElementById("error").innerText = "Вы не ввели ФИО адресата"
               return;
           }
-          if (text.length < 10){
+          if (mark.length < 1){
+              document.getElementById("error").innerText = "Вы не поставили оценку"
+              return;
+          }
+          if (text.length < 50){
               document.getElementById("error").innerText = "Вы не ввели пояснение"
               return;
           }
